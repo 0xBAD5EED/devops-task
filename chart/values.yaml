@@ -1,0 +1,31 @@
+# Image is provided by the CI - do "--set image=" on your helm command if manual deployment is desired.
+# This means don't put the image in here unless you are doing a manual deployment and don't want to use the CLI to set the image.
+namespace: formlabs
+
+app:
+  exposedPorts:
+    servicePort: 8080
+
+replicas: 1
+
+resources:
+  limits:
+    memory: "400Mi"
+    cpu: "300m"
+  requests:
+    memory: "200Mi"
+    cpu: "100m"
+
+probes:
+  readiness:
+    initialDelaySeconds: 5
+    periodSeconds: 10
+    timeoutSeconds: 2
+    successThreshold: 1
+    failureThreshold: 3
+  liveness:
+    initialDelaySeconds: 15
+    periodSeconds: 20
+    timeoutSeconds: 2
+    successThreshold: 1
+    failureThreshold: 3
